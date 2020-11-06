@@ -20,10 +20,10 @@ public class BidderDaoImpl {
 	EntityManager em;
 	
 	@Transactional
-	public void addOrUpfateBidder(Bidder bidder) {
+	public Bidder addOrUpfateBidder(Bidder bidder) {
 		
-		Bidder newBidder = em.merge(bidder);
-		System.out.println(newBidder.getbId());
+		return em.merge(bidder);
+		//System.out.println(newBidder.getbId());
 
 	}
 	
