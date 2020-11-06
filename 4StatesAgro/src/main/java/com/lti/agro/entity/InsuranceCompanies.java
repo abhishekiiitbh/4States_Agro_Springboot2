@@ -31,9 +31,16 @@ public class InsuranceCompanies {
 	double interest;
 	String cropType;
 	String state;
+	double farmerInterestRate;
 	
 	
 	
+	public double getFarmerInterestRate() {
+		return farmerInterestRate;
+	}
+	public void setFarmerInterestRate(double farmerInterestRate) {
+		this.farmerInterestRate = farmerInterestRate;
+	}
 	public List<InsuranceApplications> getInsuranceapplications() {
 		return insuranceapplications;
 	}

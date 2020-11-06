@@ -25,8 +25,8 @@ public class Sales {
 	int quantity;
 	String soilPhCertificate;
 	String fertilizer;
-	boolean check;
-	boolean sold;
+	boolean checkRequest;
+	boolean cropSold;
 	double basePrice;
 	double biddingAmount;
 	String transactionId;
@@ -50,12 +50,21 @@ public class Sales {
 	public void setSoilPhCertificate(String soilPhCertificate) {
 		this.soilPhCertificate = soilPhCertificate;
 	}
-	public boolean isCheck() {
-		return check;
+	
+	public boolean isCheckRequest() {
+		return checkRequest;
 	}
-	public void setCheck(boolean check) {
-		this.check = check;
+	public void setCheckRequest(boolean checkRequest) {
+		this.checkRequest = checkRequest;
 	}
+	public boolean isCropSold() {
+		return cropSold;
+	}
+	public void setCropSold(boolean cropSold) {
+		this.cropSold = cropSold;
+	}
+
+	
 	public String getTransactionId() {
 		return transactionId;
 	}
@@ -123,12 +132,7 @@ public class Sales {
 	public void setFertilizer(String fertilizer) {
 		this.fertilizer = fertilizer;
 	}
-	public boolean isSold() {
-		return sold;
-	}
-	public void setSold(boolean sold) {
-		this.sold = sold;
-	}
+	
 	public double getBasePrice() {
 		return basePrice;
 	}
