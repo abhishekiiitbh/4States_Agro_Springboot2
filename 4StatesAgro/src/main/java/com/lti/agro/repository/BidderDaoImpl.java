@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.lti.agro.entity.Bidder;
+import com.lti.agro.entity.Farmer;
 
 
 
@@ -25,6 +26,14 @@ public class BidderDaoImpl {
 		return em.merge(bidder);
 		//System.out.println(newBidder.getbId());
 
+	}
+	public Bidder findBidderByAadharCardNo(String AadharCard) {
+		String jpql = "Select b from Bidder b where b.aadhaarCardNumber=:adhar";
+		TypedQuery<Bidder> query= em.createQuery(jpql,Bidder.class);
+		query.setParameter("adhar", AadharCard);
+		Bidder found = query.getSingleResult();
+		return found;
+		
 	}
 	
 	public Bidder findBidderById(int bId) {

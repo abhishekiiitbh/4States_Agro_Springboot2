@@ -48,5 +48,10 @@ public class InsuranceApplicationDaoImpl implements InsuranceApplicationDao {
 		InsuranceApplications inusanceFound=em.find(InsuranceApplications.class, insuranceId);
 		return inusanceFound;
 	}
+	public InsuranceApplications showPreviousInsuranceById(int farmerid) {
+		String jpql = "select ia from InsuranceApplication ia WHERE ia.fId=:farmerid";
+		TypedQuery<InsuranceApplications> query = em.createQuery(jpql, InsuranceApplications.class);
+		return query.getSingleResult();
+	}
 
 }

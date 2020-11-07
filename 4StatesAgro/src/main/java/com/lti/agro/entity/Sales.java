@@ -32,7 +32,8 @@ public class Sales {
 	String transactionId;
 	String cropImage1;
 	String cropImage2;
-	LocalDate saledate;
+	LocalDate saleStartDate;
+	LocalDate saleEndDate;
 	
 	@ManyToOne
 	@JoinColumn(name="fId")
@@ -83,11 +84,18 @@ public class Sales {
 	public void setCropImage2(String cropImage2) {
 		this.cropImage2 = cropImage2;
 	}
-	public LocalDate getSaledate() {
-		return saledate;
+	
+	public LocalDate getSaleStartDate() {
+		return saleStartDate;
 	}
-	public void setSaledate(LocalDate saledate) {
-		this.saledate = saledate;
+	public void setSaleStartDate(LocalDate saleStartDate) {
+		this.saleStartDate = saleStartDate;
+	}
+	public LocalDate getSaleEndDate() {
+		return saleEndDate;
+	}
+	public void setSaleEndDate(LocalDate saleEndDate) {
+		this.saleEndDate = saleEndDate;
 	}
 	public Farmer getFarmer() {
 		return farmer;
@@ -145,12 +153,7 @@ public class Sales {
 	public void setBiddingAmount(double biddingAmount) {
 		this.biddingAmount = biddingAmount;
 	}
-	public LocalDate getDate() {
-		return saledate;
-	}
-	public void setDate(LocalDate saledate) {
-		this.saledate = saledate;
-	}
+	
 	
 	
 }

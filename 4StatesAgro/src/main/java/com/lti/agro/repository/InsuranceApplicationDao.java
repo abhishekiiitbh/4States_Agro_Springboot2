@@ -12,5 +12,6 @@ public interface InsuranceApplicationDao {
 	public InsuranceApplications findInsurnaceByPolicyNo(int insuranceId);
 	public InsuranceApplications findInsuranceByAadhar(String aadharNo);
 	public List<InsuranceApplications> viewAllInsuranceApplications();
+	public InsuranceApplications showPreviousInsuranceById(int farmerid);
 	
 }

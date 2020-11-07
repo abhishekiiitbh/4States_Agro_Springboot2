@@ -25,9 +25,18 @@ public class InsuranceApplications {
 	String cropImage1;
 	String cropImage2;
 	int year;
-	double sumAssured;
-	double farmersPrimium;
-	double govtsPrimium;
+	double sumAssured;//cultivationArea*sumAssured
+	double farmersPrimium;//sumAssursed*farmerInterestRate/100
+	double govtsPrimium;//sumAssured-farmerPrimium
+	String State;
+	public String getState() {
+		return State;
+	}
+
+	public void setState(String state) {
+		State = state;
+	}
+
 	@Id
 	@SequenceGenerator(name="insappSeq", initialValue=9001, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="insappSeq")

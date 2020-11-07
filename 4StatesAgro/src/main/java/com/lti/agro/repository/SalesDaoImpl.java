@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.lti.agro.entity.ContactUsRequest;
 import com.lti.agro.entity.Sales;
 
 
@@ -20,9 +22,9 @@ public class SalesDaoImpl {
 	EntityManager em;
 	
 	@Transactional
-	public void placeASellRequest(Sales sale) {
-		Sales newSale = em.merge(sale);
-		System.out.println(newSale.getSalesId());
+	public Sales placeASellRequest(Sales sale) {
+		return em.merge(sale);
+		//System.out.println(newSale.getSalesId());
 	}
 	
 	public void findSalesById(int sId) {
@@ -30,14 +32,18 @@ public class SalesDaoImpl {
 		System.out.println(foundSale);
 	}
 	
-	public void viewAllSales() {
-		String jpql="Select s from Sales s";
+	
+	public List<Sales> viewAllSales() {
+		/*String jpql="Select s from Sales s";
 		TypedQuery<Sales> query = em.createQuery(jpql,Sales.class);
 		List<Sales> sales=query.getResultList();
-		for(Sales sale:sales)
+		/*for(Sales sale:sales)
 		{
 			System.out.println(sale);
-		}
+		}*/
+		
+		Query query=em.createQuery("Select s from Sales s",Sales.class);
+		return query.getResultList();
 	}
 	
 	public void findSalesByFarmerId(int fId) {

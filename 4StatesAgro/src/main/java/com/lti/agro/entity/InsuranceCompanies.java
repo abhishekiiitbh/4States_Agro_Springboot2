@@ -30,7 +30,7 @@ public class InsuranceCompanies {
 	double sumAssuredPrHectare;
 	double interest;
 	String cropType;
-	String state;
+	String State;
 	double farmerInterestRate;
 	
 	
@@ -78,17 +78,19 @@ public class InsuranceCompanies {
 		this.cropType = cropType;
 	}
 	public String getState() {
-		return state;
+		return State;
 	}
 	public void setState(String state) {
-		this.state = state;
+		this.State = state;
 	}
 	@Override
 	public String toString() {
 		return "InsuranceCompanies [companyId=" + companyId + ", insuranceapplications=" + insuranceapplications
 				+ ", companyName=" + companyName + ", sumAssuredPrHectare=" + sumAssuredPrHectare + ", interest="
-				+ interest + ", cropType=" + cropType + ", state=" + state + "]";
+				+ interest + ", cropType=" + cropType + ", State=" + State + ", farmerInterestRate="
+				+ farmerInterestRate + "]";
 	}
+	
 	
 	
 	
