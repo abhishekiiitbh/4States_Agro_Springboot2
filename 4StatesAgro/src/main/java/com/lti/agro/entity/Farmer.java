@@ -214,16 +214,7 @@ public class Farmer {
 		this.certificateNumber = certificateNumber;
 	}
 	
-	@Override
-	public String toString() {
-		return "Farmer [fId=" + fId + ", name=" + name + ", email=" + email + ", PhoneNo=" + PhoneNo + ", bankAccount="
-				+ bankAccount + ", bankName=" + bankName + ", ifscCode=" + ifscCode + ", address=" + address + ", city="
-				+ city + ", state=" + state + ", pincode=" + pincode + ", aadhaarCardNumber=" + aadhaarCardNumber
-				+ ", panCardNumber=" + panCardNumber + ", password=" + password + ", approval=" + approval + ", area="
-				+ area + ", landAddress=" + landAddress + ", landstate=" + landstate + ", landPincode=" + landPincode
-				+ ", certificateNumber=" + certificateNumber  + "]";
-	}
-	
+
 	
 	
 }

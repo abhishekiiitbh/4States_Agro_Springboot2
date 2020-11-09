@@ -32,10 +32,21 @@ public class InsuranceApplicationDaoImpl implements InsuranceApplicationDao {
 		
 		String jpql="Select ia from InsuranceApplications ia where ia.farmer.aadhaarCardNumber=:aadharno";
 		TypedQuery<InsuranceApplications> query = em.createQuery(jpql,InsuranceApplications.class);
+		query.setParameter("aadharno", aadharNo);
 		return query.getSingleResult();
 		
 	}
-
+	
+	public InsuranceApplications checkPolicyExists(int fId,int year) {
+		
+		String jpql="Select ia from InsuranceApplications ia where ia.farmer.fId=:fId and ia.year=:year";
+		TypedQuery<InsuranceApplications> query = em.createQuery(jpql,InsuranceApplications.class);
+		query.setParameter("fId", fId);
+		query.setParameter("year", year);
+		return query.getSingleResult();
+		
+	}
+	
 	public List<InsuranceApplications> viewAllInsuranceApplications() {
 		
 		String jpql="Select ia from IsuranceApplications ia";
@@ -43,15 +54,16 @@ public class InsuranceApplicationDaoImpl implements InsuranceApplicationDao {
 		return query.getResultList();
 		
 	}
-
+	
 	public InsuranceApplications findInsurnaceByPolicyNo(int insuranceId) {
 		InsuranceApplications inusanceFound=em.find(InsuranceApplications.class, insuranceId);
 		return inusanceFound;
 	}
-	public InsuranceApplications showPreviousInsuranceById(int farmerid) {
-		String jpql = "select ia from InsuranceApplication ia WHERE ia.fId=:farmerid";
+	public List<InsuranceApplications> showPreviousInsuranceById(int farmerid) {
+		String jpql = "select ia from InsuranceApplications ia WHERE ia.farmer.fId=:farmerid";
 		TypedQuery<InsuranceApplications> query = em.createQuery(jpql, InsuranceApplications.class);
-		return query.getSingleResult();
+		query.setParameter("farmerid",farmerid);
+		return query.getResultList();
 	}
 
 }

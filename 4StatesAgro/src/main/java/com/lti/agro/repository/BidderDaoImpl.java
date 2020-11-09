@@ -41,14 +41,11 @@ public class BidderDaoImpl {
 		return foundBidder;
 	}
 	
-	public void viewAllBidders() {
+	public List<Bidder> viewAllBidders() {
 		String jpql="Select b from Bidder b";
 		TypedQuery<Bidder> query = em.createQuery(jpql, Bidder.class);
-		List<Bidder> bidders = query.getResultList();
-		for(Bidder bidder:bidders)
-		{
-			System.out.println(bidder);
-		}
+		return query.getResultList();
+		
 	}
 	
 }

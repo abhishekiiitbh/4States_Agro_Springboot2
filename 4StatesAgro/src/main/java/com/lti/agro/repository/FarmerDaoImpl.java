@@ -42,13 +42,10 @@ public class FarmerDaoImpl {
 		
 	}
 	
-	public void viewAllFarmers(){
+	public List<Farmer> viewAllFarmers(){
 		String jpql= "Select f from Farmer f";
 		TypedQuery<Farmer> query = em.createQuery(jpql,Farmer.class);
-		List<Farmer> farmers = query.getResultList();
-		for(Farmer farmer:farmers)
-		{
-			System.out.println(farmer);
-		}
+		return query.getResultList();
+		
 	}
 }

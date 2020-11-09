@@ -1,9 +1,5 @@
 package com.lti.agro.controller;
 
-
-	
-	
-
 	import java.util.ArrayList;
 	import java.util.List;
 
@@ -12,58 +8,33 @@ package com.lti.agro.controller;
 	import org.springframework.web.bind.annotation.GetMapping;
 	import org.springframework.web.bind.annotation.PostMapping;
 	import org.springframework.web.bind.annotation.RequestBody;
-	import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-	import com.lti.agro.entity.Sales;
+import com.lti.agro.dto.SalesViewDto;
+import com.lti.agro.entity.Sales;
 	import com.lti.agro.repository.SalesDaoImpl;
+import com.lti.agro.services.SaleServices;
 
 	@CrossOrigin
 	@RestController
 	public class SalesController {
 
 		@Autowired
-		SalesDaoImpl salesdaotest=new SalesDaoImpl();
-
-		@PostMapping(path = "/placeASellRequest")
-		public String placeASellRequest(@RequestBody Sales sales) {
-
-			Sales newsale = salesdaotest.placeASellRequest(sales);
-
-			System.out.println(newsale.getCropName() + " " + newsale.getQuantity() + " " + newsale.getBiddingAmount());
-
-			return "sell request successfully placed.";
-		}
+		SaleServices saleService;
 
 		@GetMapping(path = "/viewMarketPlace")
-		public List<Sales> viewMarketPlace() {
+		public List<SalesViewDto> viewMarketPlace() {
 
-			List<Sales> sales = salesdaotest.viewAllSales();
+			return saleService.viewAllSales();
 
-			List<Sales> res=new ArrayList<Sales>();
-
-			for (Sales s : sales) {
-				if (s.isCheckRequest() == true && s.isCropSold() == false) {
-					res.add(s);
-				}
-			}
-
-			return res;
 		}
 
 		@GetMapping(path = "/viewSoldCropHistory")
-		public List<Sales> viewSoldCropHistory() {
+		public List<SalesViewDto> viewSoldCropHistory(@RequestParam("fId") int fId) {
 
-			List<Sales> sales = salesdaotest.viewAllSales();
+			return saleService.viewSoldCropHistory(fId);
 
-			List<Sales> res=new ArrayList<Sales>();
-
-			for (Sales s : sales) {
-				if (s.isCheckRequest() == true && s.isCropSold() == true) {
-					res.add(s);
-				}
-			}
-
-			return res;
 		}
 
 	}

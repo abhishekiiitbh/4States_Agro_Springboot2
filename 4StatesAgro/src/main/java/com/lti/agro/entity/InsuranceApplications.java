@@ -195,15 +195,6 @@ public class InsuranceApplications {
 		this.farmer = farmer;
 	}
 
-	@Override
-	public String toString() {
-		return "InsuranceApplications [name=" + name + ", email=" + email + ", address=" + address + ", cropName="
-				+ cropName + ", cropType=" + cropType + ", cultivationArea=" + cultivationArea + ", year=" + year
-				+ ", sumAssured=" + sumAssured + ", farmersPrimium=" + farmersPrimium + ", govtsPrimium=" + govtsPrimium
-				+ ", policyNo=" + policyNo + ", status=" + status + ", farmer=" + farmer + ", insurancecompany="
-				+ insurancecompany + ", insuranceclaim=" + insuranceclaim + "]";
-	}
-	
 	
 	
 	

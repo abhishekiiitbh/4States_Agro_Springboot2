@@ -1,5 +1,7 @@
 package com.lti.agro.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.agro.dto.CalculateDto;
 import com.lti.agro.dto.InsuranceDto;
+import com.lti.agro.dto.InsuranceViewDto;
 import com.lti.agro.dto.Status;
 import com.lti.agro.dto.Status.StatusType;
 import com.lti.agro.entity.InsuranceApplications;
@@ -24,15 +27,23 @@ import com.lti.agro.services.InsuranceClaimServices;
 public class InsuranceApplicationController {
 
 	@Autowired
-	InsuranceApplicationService insuranceapplicationservice;
+	InsuranceApplicationServiceImpl insuranceapplicationservice;
+//	InsuranceApplicationService insuranceapplicationservice;
+	
 	@Autowired
 	EmailService emailServices;
-
-	InsuranceApplications insuranceApp = new InsuranceApplications();
+	
+	@Autowired
+	InsuranceApplicationService insuranceApplicationservice;
+	@Autowired
+	InsuranceClaimServices insuranceClaimService;
+	// InsuranceApplicationServiceImpl serviceimpl;
+	
 
 	@PostMapping(path = "/registerInsurance")
 
 	public Status insuranceApplicationRequest(@RequestBody InsuranceDto insuranceDto) {
+		InsuranceApplications insuranceApp = new InsuranceApplications();
 		// System.out.println("Shweta"+insuranceDto.getState());
 		// System.out.println("Thakur"+insuranceDto.getCropType());
 		insuranceApp.setName(insuranceDto.getName());
@@ -63,25 +74,15 @@ public class InsuranceApplicationController {
 
 	}
 
-	@Autowired
-	InsuranceApplicationService insuranceApplicationservice;
-	@Autowired
-	InsuranceClaimServices insuranceClaimService;
-	// InsuranceApplicationServiceImpl serviceimpl;
 
 	@GetMapping(path = "/show-insurance")
 
-	public InsuranceApplications showPreviousInsurance(@RequestParam("fId") int fId) {
-		InsuranceApplications ia = insuranceApplicationservice.showPreviousInsuranceById(fId);
-		return ia;
+	public List<InsuranceViewDto> showPreviousInsurance(@RequestParam("fId") int fId) {
+		return  insuranceApplicationservice.showPreviousInsuranceById(fId);
+		
 	}
 
-	@GetMapping(path = "/show-claim")
-
-	public InsuranceClaim showPreviousclaim(@RequestParam("fId") int fId) {
-		InsuranceClaim ic = insuranceClaimService.showPreviousClaimByFid(fId);
-		return ic;
-	}
+	
 
 	@GetMapping(path = "/calcInsurance")
 	public CalculateDto calcInsurance(@RequestParam("state") String state, @RequestParam("cropType") String cropType,

@@ -27,7 +27,7 @@ public class InsuranceClaimDaoImpl {
 	
 	public InsuranceClaim checkClaimExists(int policyNo) {
 		
-		String jpql ="select ic from InsuranceClaim ic where ic.policyNo=:ps";
+		String jpql ="select ic from InsuranceClaim ic where ic.insuranceapplication.policyNo=:ps";
 		TypedQuery<InsuranceClaim> query =em.createQuery(jpql, InsuranceClaim.class);
 		query.setParameter("ps", policyNo);
 		return query.getSingleResult();
@@ -38,6 +38,10 @@ public class InsuranceClaimDaoImpl {
 		TypedQuery<InsuranceClaim> query=em.createQuery(jpql,InsuranceClaim.class);
 		return query.getSingleResult();
 		
+	}
+	
+	public InsuranceClaim findByRId(int rId) {
+		return em.find(InsuranceClaim.class, rId);
 	}
 	
 }

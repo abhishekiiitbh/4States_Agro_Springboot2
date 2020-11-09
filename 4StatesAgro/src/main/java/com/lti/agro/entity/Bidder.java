@@ -171,15 +171,7 @@ public class Bidder {
 		this.traderLicenseNumber = traderLicenseNumber;
 	}
 
-	@Override
-	public String toString() {
-		return "Bidder [bId=" + bId + ", name=" + name + ", email=" + email + ", PhoneNo=" + PhoneNo + ", bankAccount="
-				+ bankAccount + ", bankName=" + bankName + ", ifscCode=" + ifscCode + ", address=" + address + ", city="
-				+ city + ", state=" + state + ", pincode=" + pincode + ", aadhaarCardNumber=" + aadhaarCardNumber
-				+ ", panCardNumber=" + panCardNumber + ", password=" + password + ", approval=" + approval
-				+ ", traderLicenseNumber=" + traderLicenseNumber + "]";
-	}
-	
+
 	
 	
 }

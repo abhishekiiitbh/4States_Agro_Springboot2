@@ -83,15 +83,7 @@ public class InsuranceCompanies {
 	public void setState(String state) {
 		this.State = state;
 	}
-	@Override
-	public String toString() {
-		return "InsuranceCompanies [companyId=" + companyId + ", insuranceapplications=" + insuranceapplications
-				+ ", companyName=" + companyName + ", sumAssuredPrHectare=" + sumAssuredPrHectare + ", interest="
-				+ interest + ", cropType=" + cropType + ", State=" + State + ", farmerInterestRate="
-				+ farmerInterestRate + "]";
-	}
-	
-	
+
 	
 	
 	

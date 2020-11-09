@@ -7,10 +7,8 @@ public class InsuranceClaimDto {
 	String causeOfClaim;
 	LocalDate dateOfLoss;
 	LocalDate dateOfClaim;
-	
 	String cropImage1;
 	String cropImage2;
-	
 	int policyNo;
 	public String getCauseOfClaim() {
 		return causeOfClaim;

@@ -127,13 +127,7 @@ public class InsuranceClaim {
 		this.amountClaimed = amountClaimed;
 	}
 
-	@Override
-	public String toString() {
-		return "InsuranceClaim [rId=" + rId + ", insuranceapplication=" + insuranceapplication + ", causeOfClaim="
-				+ causeOfClaim + ", dateOfLoss=" + dateOfLoss + ", dateOfClaim=" + dateOfClaim + ", dateOfApproval="
-				+ dateOfApproval + ", amountClaimed=" + amountClaimed + "]";
-	}
-	
+
 	
 	
 	

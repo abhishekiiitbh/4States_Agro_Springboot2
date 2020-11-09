@@ -22,25 +22,18 @@ public class SalesDaoImpl {
 	EntityManager em;
 	
 	@Transactional
-	public Sales placeASellRequest(Sales sale) {
+	public Sales addOrUpdateSales(Sales sale) {
 		return em.merge(sale);
-		//System.out.println(newSale.getSalesId());
 	}
 	
-	public void findSalesById(int sId) {
-		Sales foundSale = em.find(Sales.class, sId);
-		System.out.println(foundSale);
+	public Sales findSalesById(int sId) {
+		return  em.find(Sales.class, sId);
+		
 	}
 	
 	
 	public List<Sales> viewAllSales() {
-		/*String jpql="Select s from Sales s";
-		TypedQuery<Sales> query = em.createQuery(jpql,Sales.class);
-		List<Sales> sales=query.getResultList();
-		/*for(Sales sale:sales)
-		{
-			System.out.println(sale);
-		}*/
+		
 		
 		Query query=em.createQuery("Select s from Sales s",Sales.class);
 		return query.getResultList();
@@ -54,12 +47,13 @@ public class SalesDaoImpl {
 		System.out.println(sale);
 	}
 	
-	public void findSalesByBidder(int bId) {
+	public List<Sales> findSalesByBidder(int bId) {
 		
-		String jpql="Select s from Sales s where s.bid=:bidderId";
+		String jpql="Select s from Sales s where s.bidder.bId=:bidderId";
 		TypedQuery<Sales> query = em.createQuery(jpql, Sales.class);
 		query.setParameter("bidderId", bId);
-		Sales sale=query.getSingleResult();
-		System.out.println(sale);
+		return query.getResultList();
 	}
+	
+	
 }

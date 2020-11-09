@@ -8,54 +8,50 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.lti.agro.entity.Bidder;
 import com.lti.agro.entity.Farmer;
+import com.lti.agro.repository.SignInDaoImpl;
 
 
-@Repository
+@Service
 public class SignInServiceImpl {
 	
-	@PersistenceContext
-	EntityManager em;
+	@Autowired
+	SignInDaoImpl signInDao;
 
 	
 	@Transactional
 	public boolean signIn(String email,String password,String userType){
 		
-		if(userType=="Admin"){// here we will add login credentails of admin
-			if(email=="Abhishek.Pandit@lntinfotech.com" && password=="Agro@2020")
+		if(userType.compareTo("Admin")==0){// here we will add login credentails of admin
+			if(email.compareTo("Abhishek.Pandit@lntinfotech.com")==0 && password.compareTo("Agro@2020")==0)
 				return true;
 			
-		}else if(userType=="Bidder"){
+		}
+		else if(userType.compareTo("Bidder")==0){
 			
-			String jpql="select b from Bidder b where b.email=:eml and b.password=:pwd";
-			// here we will check approval if it is "Yes" then check login credentails
+			try {
+				Bidder bidder = signInDao.signInByBidder(email, password);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
 			
-			Query query=em.createQuery(jpql,Bidder.class);
-			query.setParameter("eml", email);
-			query.setParameter("pwd", password);
-			
-			Bidder acc=(Bidder)query.getResultList().stream().findFirst().orElse(null);
-	        if(acc!=null && acc.isApproval()==true)
-	            return true;
-			
-			
-		}else if(userType=="Farmer"){
-			
-			String jpql="select f from tbl_farmer b where f.email=:eml and f.password=:pwd";
-			Query query=em.createQuery(jpql,Farmer.class);
-			query.setParameter("eml", email);
-			query.setParameter("pwd", password);
-			
-			Farmer acc=(Farmer)query.getResultList().stream().findFirst().orElse(null);
-	        if(acc!=null)
-	            return true;
 			
 		}
-		
-		
+		else if(userType.compareTo("Farmer")==0){
+			System.out.println("InsideFarmer");
+			try {
+				Farmer farmer = signInDao.signInByFarmer(email, password);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
 		return false;
 	}
 	
