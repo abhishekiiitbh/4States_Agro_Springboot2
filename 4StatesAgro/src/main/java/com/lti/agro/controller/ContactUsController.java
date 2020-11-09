@@ -13,7 +13,7 @@ import com.lti.agro.services.EmailService;
 import com.lti.agro.dto.Status;
 import com.lti.agro.dto.Status.StatusType;
 import com.lti.agro.entity.ContactUsRequest;
-import com.lti.agro.repository.ContactUsDaoImpl;
+import com.lti.agro.repository.ContactUsDao;
 
 @CrossOrigin
 @RestController
@@ -23,7 +23,7 @@ public class ContactUsController {
 	private EmailService emailservice;
 	
 	@Autowired
-	ContactUsDaoImpl contactusdaoimpl;
+	ContactUsDao contactusdaoimpl;
 	
 	@PostMapping(path="/ContactUsRequest")
 	public Status ContactUsRequest(@RequestBody ContactUsRequest contactusrequest){

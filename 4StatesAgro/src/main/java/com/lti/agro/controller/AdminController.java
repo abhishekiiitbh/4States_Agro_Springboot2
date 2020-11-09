@@ -16,26 +16,27 @@ import com.lti.agro.dto.Status.StatusType;
 import com.lti.agro.entity.Bidder;
 import com.lti.agro.entity.Farmer;
 import com.lti.agro.entity.Sales;
-import com.lti.agro.repository.ContactUsDaoImpl;
-import com.lti.agro.services.AdminServicesImpl;
+import com.lti.agro.repository.ContactUsDao;
+import com.lti.agro.services.AdminServices;
 import com.lti.agro.services.EmailService;
-import com.lti.agro.services.SignInServiceImpl;
+import com.lti.agro.services.SignInService;
+
 
 @RestController
 @CrossOrigin
 public class AdminController {
 	
 	@Autowired
-	AdminServicesImpl adminService;
+	AdminServices adminService;
 	
 	@Autowired
 	private EmailService emailService;
 	
 	@Autowired
-	ContactUsDaoImpl contactusdaoimpl;
+	ContactUsDao contactusdaoimpl;
 	
 	@Autowired
-	SignInServiceImpl signin;
+	SignInService signin;
 	
 	@PostMapping(path = "/approveFarmerRegistration")
 	public Status approveFarmerRegistration(@RequestParam("fid") int fId) {

@@ -1,7 +1,5 @@
 package com.lti.agro.controller;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +16,7 @@ import com.lti.agro.dto.Status;
 import com.lti.agro.dto.Status.StatusType;
 import com.lti.agro.entity.Farmer;
 import com.lti.agro.entity.Sales;
-import com.lti.agro.repository.FarmerDaoImpl;
-import com.lti.agro.repository.SalesDaoImpl;
+import com.lti.agro.repository.SalesDao;
 import com.lti.agro.services.EmailService;
 import com.lti.agro.services.FarmerServices;
 
@@ -34,7 +31,7 @@ public class FarmerController {
 	private EmailService emailService;
 	
 	@Autowired
-	SalesDaoImpl salesdaotest;
+	SalesDao salesdaotest;
 	
 	@PostMapping(path="/registerFarmer")
 	public Status registerFarmer(@RequestBody Farmer farmer){

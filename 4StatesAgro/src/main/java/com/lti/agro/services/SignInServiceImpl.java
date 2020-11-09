@@ -1,27 +1,20 @@
 package com.lti.agro.services;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.lti.agro.entity.Bidder;
 import com.lti.agro.entity.Farmer;
-import com.lti.agro.repository.SignInDaoImpl;
+import com.lti.agro.repository.SignInDao;
 
 
 @Service
-public class SignInServiceImpl {
+public class SignInServiceImpl implements SignInService {
 	
 	@Autowired
-	SignInDaoImpl signInDao;
+	SignInDao signInDao;
 
 	
 	@Transactional

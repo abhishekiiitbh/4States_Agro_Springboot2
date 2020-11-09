@@ -18,7 +18,7 @@ import com.lti.agro.entity.ContactUsRequest;
 
 
 @Repository
-public class ContactUsDaoImpl {
+public class ContactUsDaoImpl implements ContactUsDao{
 
 	@PersistenceContext
 	EntityManager em;

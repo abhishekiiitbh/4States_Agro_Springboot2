@@ -11,7 +11,7 @@ import com.lti.agro.entity.InsuranceClaim;
 
 
 @Repository
-public class InsuranceClaimDaoImpl {
+public class InsuranceClaimDaoImpl implements InsuranceClaimDao{
 	
 	@PersistenceContext
 	EntityManager em;

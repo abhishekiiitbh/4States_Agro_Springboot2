@@ -1,19 +1,14 @@
 package com.lti.agro.controller;
 
-	import java.util.ArrayList;
-	import java.util.List;
+import java.util.List;
 
-	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.web.bind.annotation.CrossOrigin;
-	import org.springframework.web.bind.annotation.GetMapping;
-	import org.springframework.web.bind.annotation.PostMapping;
-	import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.agro.dto.SalesViewDto;
-import com.lti.agro.entity.Sales;
-	import com.lti.agro.repository.SalesDaoImpl;
 import com.lti.agro.services.SaleServices;
 
 	@CrossOrigin

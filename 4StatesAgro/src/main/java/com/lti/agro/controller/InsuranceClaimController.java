@@ -14,7 +14,6 @@ import com.lti.agro.dto.InsuranceClaimDto;
 import com.lti.agro.dto.Status;
 import com.lti.agro.dto.Status.StatusType;
 import com.lti.agro.entity.InsuranceClaim;
-import com.lti.agro.services.EmailService;
 import com.lti.agro.services.InsuranceClaimServices;
 
 @RestController

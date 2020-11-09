@@ -16,10 +16,8 @@ import com.lti.agro.dto.InsuranceViewDto;
 import com.lti.agro.dto.Status;
 import com.lti.agro.dto.Status.StatusType;
 import com.lti.agro.entity.InsuranceApplications;
-import com.lti.agro.entity.InsuranceClaim;
 import com.lti.agro.services.EmailService;
 import com.lti.agro.services.InsuranceApplicationService;
-import com.lti.agro.services.InsuranceApplicationServiceImpl;
 import com.lti.agro.services.InsuranceClaimServices;
 
 @RestController
@@ -27,17 +25,15 @@ import com.lti.agro.services.InsuranceClaimServices;
 public class InsuranceApplicationController {
 
 	@Autowired
-	InsuranceApplicationServiceImpl insuranceapplicationservice;
-//	InsuranceApplicationService insuranceapplicationservice;
+	InsuranceApplicationService insuranceapplicationservice;
 	
 	@Autowired
-	EmailService emailServices;
+	private EmailService emailServices;
 	
 	@Autowired
 	InsuranceApplicationService insuranceApplicationservice;
 	@Autowired
 	InsuranceClaimServices insuranceClaimService;
-	// InsuranceApplicationServiceImpl serviceimpl;
 	
 
 	@PostMapping(path = "/registerInsurance")

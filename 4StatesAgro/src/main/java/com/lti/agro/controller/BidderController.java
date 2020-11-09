@@ -15,7 +15,6 @@ import com.lti.agro.dto.Status;
 import com.lti.agro.dto.Status.StatusType;
 import com.lti.agro.entity.Bidder;
 import com.lti.agro.entity.Sales;
-import com.lti.agro.repository.BidderDaoImpl;
 import com.lti.agro.services.BidderServices;
 import com.lti.agro.services.EmailService;
 
@@ -26,7 +25,7 @@ public class BidderController {
 	@Autowired
 	BidderServices bidderServices;
 	@Autowired
-	EmailService emailServices;
+	private EmailService emailServices;
 	
 	@PostMapping(path="/registerBidder")
 	public Status registerBidder(@RequestBody Bidder bidder){

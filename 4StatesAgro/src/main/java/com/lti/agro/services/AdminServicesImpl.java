@@ -16,29 +16,30 @@ import com.lti.agro.entity.Farmer;
 import com.lti.agro.entity.InsuranceApplications;
 import com.lti.agro.entity.InsuranceClaim;
 import com.lti.agro.entity.Sales;
-import com.lti.agro.repository.BidderDaoImpl;
-import com.lti.agro.repository.FarmerDaoImpl;
-import com.lti.agro.repository.InsuranceApplicationDaoImpl;
-import com.lti.agro.repository.InsuranceClaimDaoImpl;
-import com.lti.agro.repository.SalesDaoImpl;
+import com.lti.agro.repository.BidderDao;
+import com.lti.agro.repository.FarmerDao;
+import com.lti.agro.repository.InsuranceApplicationDao;
+import com.lti.agro.repository.InsuranceClaimDao;
+import com.lti.agro.repository.SalesDao;
+
 
 @Service
-public class AdminServicesImpl {
+public class AdminServicesImpl implements AdminServices{
 	
 	@Autowired
-	FarmerDaoImpl farmerdao;
+	FarmerDao farmerdao;
 	
 	@Autowired
-	BidderDaoImpl bidderDao;
+	BidderDao bidderDao;
 	
 	@Autowired
-	SalesDaoImpl salesDaoImpl;
+	SalesDao salesDaoImpl;
 	
 	@Autowired
-	InsuranceApplicationDaoImpl insuranceDao;
+	InsuranceApplicationDao insuranceDao;
 	
 	@Autowired
-	InsuranceClaimDaoImpl insuranceClaimDao;
+	InsuranceClaimDao insuranceClaimDao;
 	
 	public Farmer approveFarmerRegistration(int fId) {
 		Farmer newFarmer = farmerdao.findFarmerById(fId);
@@ -63,7 +64,7 @@ public class AdminServicesImpl {
 		return newSale;
 	}
 	
-	//Yesterdays Part Guna
+	
 		public Sales finalizeBid(int sId) {
 			
 			Sales sales=salesDaoImpl.findSalesById(sId);

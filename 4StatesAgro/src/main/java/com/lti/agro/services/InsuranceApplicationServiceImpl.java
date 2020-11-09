@@ -11,9 +11,9 @@ import com.lti.agro.dto.InsuranceViewDto;
 import com.lti.agro.entity.Farmer;
 import com.lti.agro.entity.InsuranceApplications;
 import com.lti.agro.entity.InsuranceCompanies;
-import com.lti.agro.repository.FarmerDaoImpl;
+import com.lti.agro.repository.FarmerDao;
 import com.lti.agro.repository.InsuranceApplicationDao;
-import com.lti.agro.repository.InsuranceCompanyImpl;
+import com.lti.agro.repository.InsuranceCompanyDao;
 
 
 @Service
@@ -22,9 +22,10 @@ public class InsuranceApplicationServiceImpl implements InsuranceApplicationServ
 	@Autowired
 	InsuranceApplicationDao insuranceappndao;
 	@Autowired
-	FarmerDaoImpl farmerDao;
+	FarmerDao farmerDao;
 	@Autowired
-	InsuranceCompanyImpl insuranceCompany;
+	InsuranceCompanyDao insuranceCompany;
+	
 	public boolean applyForInsurance(InsuranceApplications insurance,int fId) {
 		 System.out.println(insurance.getState());
 		 System.out.println(insurance.getCropType());

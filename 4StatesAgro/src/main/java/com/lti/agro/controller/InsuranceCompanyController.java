@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lti.agro.dto.Status;
 import com.lti.agro.dto.Status.StatusType;
 import com.lti.agro.entity.InsuranceCompanies;
-import com.lti.agro.repository.InsuranceCompanyImpl;
+import com.lti.agro.repository.InsuranceCompanyDao;
 
 @RestController
 @CrossOrigin
 public class InsuranceCompanyController {
 
 	@Autowired
-	InsuranceCompanyImpl insurancecom;
+	InsuranceCompanyDao insurancecom;
 	@PostMapping(path="/registerCompany")
 	
 	public Status AddAInsuranceCompany(@RequestBody InsuranceCompanies companies) {

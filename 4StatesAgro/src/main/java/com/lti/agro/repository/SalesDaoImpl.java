@@ -16,7 +16,7 @@ import com.lti.agro.entity.Sales;
 
 
 @Repository
-public class SalesDaoImpl {
+public class SalesDaoImpl implements SalesDao {
 	
 	@PersistenceContext
 	EntityManager em;

@@ -15,7 +15,7 @@ import com.lti.agro.entity.Bidder;
 
 
 @Repository
-public class BidderDaoImpl {
+public class BidderDaoImpl implements BidderDao {
 
 	@PersistenceContext
 	EntityManager em;

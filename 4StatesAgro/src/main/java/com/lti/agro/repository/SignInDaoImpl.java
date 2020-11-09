@@ -10,7 +10,7 @@ import com.lti.agro.entity.Bidder;
 import com.lti.agro.entity.Farmer;
 
 @Repository
-public class SignInDaoImpl {
+public class SignInDaoImpl implements SignInDao {
 	
 	@PersistenceContext
 	EntityManager em;

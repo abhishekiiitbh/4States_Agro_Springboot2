@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.lti.agro.entity.InsuranceCompanies;
 
 @Repository
-public class InsuranceCompanyImpl {
+public class InsuranceCompanyImpl implements InsuranceCompanyDao {
 	
 @PersistenceContext
 EntityManager em;

@@ -14,7 +14,7 @@ import com.lti.agro.entity.Farmer;
 
 
 @Repository
-public class FarmerDaoImpl {
+public class FarmerDaoImpl implements FarmerDao{
 	
 	@PersistenceContext
 	EntityManager em;
