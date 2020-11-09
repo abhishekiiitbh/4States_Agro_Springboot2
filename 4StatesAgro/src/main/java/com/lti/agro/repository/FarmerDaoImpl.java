@@ -48,4 +48,11 @@ public class FarmerDaoImpl {
 		return query.getResultList();
 		
 	}
+	
+	public Farmer findFarmerByEmaiId(String email) {
+		String jpql="Select f from Farmer f where f.email=:email";
+		TypedQuery<Farmer> query = em.createQuery(jpql, Farmer.class);
+		query.setParameter("email",email);
+		return query.getSingleResult();
+	}
 }

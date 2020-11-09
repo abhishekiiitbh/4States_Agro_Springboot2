@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.lti.agro.entity.Bidder;
-import com.lti.agro.entity.Farmer;
+
 
 
 
@@ -48,4 +48,11 @@ public class BidderDaoImpl {
 		
 	}
 	
+	
+	public Bidder findBidderByEmaiId(String email) {
+		String jpql="Select b from Bidder b where b.email=:email";
+		TypedQuery<Bidder> query = em.createQuery(jpql, Bidder.class);
+		query.setParameter("email",email);
+		return query.getSingleResult();
+	}
 }
