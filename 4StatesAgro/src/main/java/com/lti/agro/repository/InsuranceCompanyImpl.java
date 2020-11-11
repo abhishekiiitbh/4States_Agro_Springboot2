@@ -25,7 +25,7 @@ public InsuranceCompanies findCompanyById(int companyId) {
 }
 
 public InsuranceCompanies findCompanyByStateAndCropType(String State,String cropType) {
-	String jpql="select c from InsuranceCompanies c where c.State=:st and c.cropType=:ct";
+	String jpql="select c from InsuranceCompanies c where c.state=:st and c.cropType=:ct";
 	TypedQuery<InsuranceCompanies> query=em.createQuery(jpql, InsuranceCompanies.class);
 	query.setParameter("st", State);
 	query.setParameter("ct", cropType);

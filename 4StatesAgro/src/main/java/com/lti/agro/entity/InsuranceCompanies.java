@@ -30,7 +30,7 @@ public class InsuranceCompanies {
 	double sumAssuredPrHectare;
 	double interest;
 	String cropType;
-	String State;
+	String state;
 	double farmerInterestRate;
 	
 	
@@ -78,10 +78,10 @@ public class InsuranceCompanies {
 		this.cropType = cropType;
 	}
 	public String getState() {
-		return State;
+		return state;
 	}
 	public void setState(String state) {
-		this.State = state;
+		this.state = state;
 	}
 
 	
