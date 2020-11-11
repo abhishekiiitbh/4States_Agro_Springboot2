@@ -7,9 +7,11 @@ import com.lti.agro.entity.Bidder;
 import com.lti.agro.entity.Sales;
 
 public interface BidderServices {
-	public boolean addOrUpdateABidder(Bidder bidder);
+	public int addOrUpdateABidder(Bidder bidder);
 	public List<Sales> purchaseHistory(int bId);
 	public List<SalesViewDto> viewWonAuction(int bId);
 	public boolean makePayment(int sId);
 	public boolean placeBid(int sId, double biddingAmount,int bId);
+	public int updateABidder(Bidder bidder);
+	public Bidder findBidderById(int bId);
 }

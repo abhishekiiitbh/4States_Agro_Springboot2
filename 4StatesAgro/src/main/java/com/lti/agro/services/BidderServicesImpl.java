@@ -23,15 +23,16 @@ public class BidderServicesImpl implements BidderServices {
 	@Autowired
 	SalesDao salesDaoImpl;
 	
-	public boolean addOrUpdateABidder(Bidder bidder) {
+	public int addOrUpdateABidder(Bidder bidder) {
 		
 		try {
 			bidderDaoImpl.findBidderByAadharCardNo(bidder.getAadhaarCardNumber());
-			return false;
+			return 0;
 		}catch(Exception e){
-			bidderDaoImpl.addOrUpfateBidder(bidder);
+			Bidder newbidder = bidderDaoImpl.addOrUpfateBidder(bidder);
+			return newbidder.getbId();
 		}
-		return true;
+		
 	}
 	
 	public List<Sales> purchaseHistory(int bId)
@@ -94,5 +95,14 @@ public class BidderServicesImpl implements BidderServices {
 		return false;
 		
 	}
-	
+
+	@Override
+	public int updateABidder(Bidder bidder) {
+		Bidder newBidder = bidderDaoImpl.addOrUpfateBidder(bidder);
+		return newBidder.getbId();
+	}
+	@Override
+	public Bidder findBidderById(int bid) {
+		return bidderDaoImpl.findBidderById(bid);
+	}
 }

@@ -70,7 +70,7 @@ public class FarmerController {
 	public Status uploadDocuments(FarmerDto farmer) {
 		Status status = new Status();
 		Farmer newFarmer = farmerService.findFarmerById(Integer.parseInt(farmer.getAadharcardNumber()));
-		 String aadharLocation ="D:/uploads/Aadhar/";
+		 String aadharLocation ="D:/uploads/Farmer/Aadhar/";
 			String aadharName = farmer.getAadhaarUpload().getOriginalFilename();
 			String aadharFile = aadharLocation +aadharName;
 			try {
@@ -82,8 +82,8 @@ public class FarmerController {
 	            status.setMessage(e.getMessage());
 	            return status;
 			}
-			String panCardLocation ="D:/uploads/Pan/";
-			String panCardName = farmer.getAadhaarUpload().getOriginalFilename();
+			String panCardLocation ="D:/uploads/Farmer/Pan/";
+			String panCardName = farmer.getPanCardUpload().getOriginalFilename();
 			String panCardFile = panCardLocation+panCardName;
 			try {
 				FileCopyUtils.copy(farmer.getPanCardUpload().getInputStream(), new FileOutputStream(panCardFile));
@@ -94,10 +94,24 @@ public class FarmerController {
 	            status.setMessage(e.getMessage());
 	            return status;
 			}
+			String certificateLocation ="D:/uploads/Farmer/Certificate/";
+			String certificateName = farmer.getCertificateUpload().getOriginalFilename();
+			String certificateFile = certificateLocation+certificateName;
+			try {
+				FileCopyUtils.copy(farmer.getCertificateUpload().getInputStream(), new FileOutputStream(certificateFile));
+			}
+			catch (IOException e) {
+	            e.printStackTrace();
+	            status.setStatus(StatusType.FAILURE);
+	            status.setMessage(e.getMessage());
+	            return status;
+			}
 		System.out.println(aadharFile);
 		System.out.println(panCardFile);
+		System.out.println(certificateFile);
 		newFarmer.setAadhaarUpload(aadharFile);
 		newFarmer.setPanCardUpload(panCardFile);
+		newFarmer.setCertificateUpload(certificateFile);
 		int result = farmerService.updateFarmer(newFarmer);
 		if(result>0) {
 		status.setStatus(StatusType.SUCCESS);
