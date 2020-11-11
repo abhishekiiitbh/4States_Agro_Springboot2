@@ -3,6 +3,7 @@ package com.lti.agro.services;
 import java.util.List;
 
 import com.lti.agro.dto.AdminViewInsuranceApplicationDto;
+import com.lti.agro.dto.InsuranceClaimDto;
 import com.lti.agro.dto.RequestDto;
 import com.lti.agro.entity.Bidder;
 import com.lti.agro.entity.Farmer;
@@ -18,4 +19,5 @@ public interface AdminServices {
 	public boolean AdminApprovalForInsuranceClaim(int rId,double amountClaim);
 	public List<RequestDto> viewFarmerRequests();
 	public List<RequestDto> viewBidderRequests();
+	public List<InsuranceClaimDto> viewClaimRequests();
 }

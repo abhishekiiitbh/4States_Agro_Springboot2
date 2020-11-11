@@ -49,7 +49,7 @@ public class InsuranceApplicationDaoImpl implements InsuranceApplicationDao {
 	
 	public List<InsuranceApplications> viewAllInsuranceApplications() {
 		
-		String jpql="Select ia from IsuranceApplications ia";
+		String jpql="Select ia from InsuranceApplications ia";
 		TypedQuery<InsuranceApplications> query=em.createQuery(jpql,InsuranceApplications.class);
 		return query.getResultList();
 		

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.agro.dto.AdminViewInsuranceApplicationDto;
+import com.lti.agro.dto.InsuranceClaimDto;
 import com.lti.agro.dto.RequestDto;
 import com.lti.agro.entity.Bidder;
 import com.lti.agro.entity.Farmer;
@@ -221,5 +222,22 @@ public class AdminServicesImpl implements AdminServices{
 			}
 			
 			return bidders;
+		}
+
+		@Override
+		public List<InsuranceClaimDto> viewClaimRequests() {
+			List<InsuranceClaimDto> requests= new ArrayList<>();
+			List<InsuranceClaim> applications = insuranceClaimDao.viewAllClaimRequests();
+			for(InsuranceClaim ic:applications)
+			{
+				InsuranceClaimDto app=new InsuranceClaimDto();
+				app.setCauseOfClaim(ic.getCauseOfClaim());
+				app.setDateOfClaim(ic.getDateOfClaim());
+				app.setDateOfLoss(ic.getDateOfLoss());
+				app.setPolicyNo(ic.getInsuranceapplications().getPolicyNo());
+				app.setrId(ic.getrId());
+				requests.add(app);
+			}
+			return requests;
 		}
 }

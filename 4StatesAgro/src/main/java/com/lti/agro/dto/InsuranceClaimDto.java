@@ -3,13 +3,20 @@ package com.lti.agro.dto;
 import java.time.LocalDate;
 
 public class InsuranceClaimDto {
-	
+	int rId;
 	String causeOfClaim;
 	LocalDate dateOfLoss;
 	LocalDate dateOfClaim;
 	String cropImage1;
 	String cropImage2;
 	int policyNo;
+	
+	public int getrId() {
+		return rId;
+	}
+	public void setrId(int rId) {
+		this.rId = rId;
+	}
 	public String getCauseOfClaim() {
 		return causeOfClaim;
 	}

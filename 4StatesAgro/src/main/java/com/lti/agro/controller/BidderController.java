@@ -58,7 +58,7 @@ public class BidderController {
 	public Status uploadDocuments(BidderDto bidder) {
 		Status status = new Status();
 		Bidder newBidder = bidderServices.findBidderById(Integer.parseInt(bidder.getbId()));
-		 String aadharLocation ="D:/uploads/Farmer/Aadhar/";
+		 String aadharLocation ="D:/uploads/Bidder/Aadhar/";
 			String aadharName = bidder.getAadhaarUpload().getOriginalFilename();
 			String aadharFile = aadharLocation +aadharName;
 			try {
@@ -70,7 +70,7 @@ public class BidderController {
 	            status.setMessage(e.getMessage());
 	            return status;
 			}
-			String panCardLocation ="D:/uploads/Farmer/Pan/";
+			String panCardLocation ="D:/uploads/Bidder/Pan/";
 			String panCardName = bidder.getPanCardUpload().getOriginalFilename();
 			String panCardFile = panCardLocation+panCardName;
 			try {
@@ -82,7 +82,7 @@ public class BidderController {
 	            status.setMessage(e.getMessage());
 	            return status;
 			}
-			String licenseLocation ="D:/uploads/Farmer/Certificate/";
+			String licenseLocation ="D:/uploads/Bidder/TraderLicense/";
 			String licenseName = bidder.getTraderLicenseUpload().getOriginalFilename();
 			String licenseFile = licenseLocation+licenseName;
 			try {

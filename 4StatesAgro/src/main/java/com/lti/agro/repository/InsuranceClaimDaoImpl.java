@@ -1,5 +1,8 @@
 package com.lti.agro.repository;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -23,7 +26,13 @@ public class InsuranceClaimDaoImpl implements InsuranceClaimDao{
 		return newClaim;
 	}
 	
-	
+	public List<InsuranceClaim> viewAllClaimRequests(){
+		String jpql="select ic from InsuranceClaim ic where ic.dateOfApproval=:value";
+		TypedQuery<InsuranceClaim> query =em.createQuery(jpql, InsuranceClaim.class);
+		query.setParameter("value", LocalDate.of(1,1, 1));
+		return query.getResultList();
+		
+	}
 	
 	public InsuranceClaim checkClaimExists(int policyNo) {
 		

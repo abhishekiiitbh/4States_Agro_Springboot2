@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.agro.dto.AdminViewInsuranceApplicationDto;
+import com.lti.agro.dto.InsuranceClaimDto;
+import com.lti.agro.dto.InsuranceViewDto;
 import com.lti.agro.dto.LoginStatus;
 import com.lti.agro.dto.RequestDto;
 import com.lti.agro.dto.Status;
@@ -144,6 +146,11 @@ public class AdminController {
 		}
 		return status;
 		
+	}
+	
+	@GetMapping(path = "/viewClaimRequest")
+	public List<InsuranceClaimDto> viewClaimRequests(){
+		return adminService.viewClaimRequests();
 	}
 	
 	@PostMapping(path = "/login")

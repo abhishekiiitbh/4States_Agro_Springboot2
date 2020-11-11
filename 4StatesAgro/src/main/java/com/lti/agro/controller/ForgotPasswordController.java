@@ -17,7 +17,7 @@ public class ForgotPasswordController {
 	@Autowired
 	ForgotPasswordServices forgotPasswordService;
 	
-	@PostMapping(path = "/forgotPassword")
+	@PostMapping(path = "/pass")
 	public Status forgotPassword(@RequestParam("email")String email,@RequestParam("userType") String userType) {
 		boolean result=forgotPasswordService.forgotPasswordEmailCheck(email, userType);
 		Status status = new Status();
