@@ -58,6 +58,7 @@ public class BidderServicesImpl implements BidderServices {
 			if(sale.isCropSold()&&sale.getTransactionId()==null)
 			{
 				SalesViewDto salewon=new SalesViewDto();
+				salewon.setSalesId(sale.getSalesId());
 				salewon.setCropName(sale.getCropName());
 				salewon.setBasePrice(sale.getBasePrice());
 				salewon.setBiddingAmount(sale.getBiddingAmount());
