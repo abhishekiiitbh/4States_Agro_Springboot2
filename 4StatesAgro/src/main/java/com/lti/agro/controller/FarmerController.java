@@ -1,8 +1,12 @@
 package com.lti.agro.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.lti.agro.dto.FarmerDto;
 import com.lti.agro.dto.SaleRequestDto;
 import com.lti.agro.dto.SalesViewDto;
 import com.lti.agro.dto.Status;
@@ -35,14 +41,15 @@ public class FarmerController {
 	
 	@PostMapping(path="/registerFarmer")
 	public Status registerFarmer(@RequestBody Farmer farmer){
-		
-		farmer.setApproval(false);
-		boolean result =  farmerService.addOrUpdate(farmer);
 		Status status = new Status();
-		if(result)
+		
+       
+		int fId =  farmerService.addOrUpdate(farmer);
+		if(fId>0)
 		{
 			status.setStatus(StatusType.SUCCESS);
 			status.setMessage("Registration Request Submitted Successfully!");
+			status.setId(fId);
 			String text="Your Request for Registration has been Submitted Successfully! Please await for"
 						+" confirmation mail from our Team!"+"Regards!<br>4StatesAgro ";
 			
@@ -54,8 +61,55 @@ public class FarmerController {
 		{
 			status.setStatus(StatusType.FAILURE);
 			status.setMessage("Request Failed! Your Record Already exists!");
+			status.setId(fId);
 		}
 		return status;
+	}
+	
+	@PostMapping("/farmerDocumentUploads")
+	public Status uploadDocuments(FarmerDto farmer) {
+		Status status = new Status();
+		Farmer newFarmer = farmerService.findFarmerById(Integer.parseInt(farmer.getAadharcardNumber()));
+		 String aadharLocation ="D:/uploads/Aadhar/";
+			String aadharName = farmer.getAadhaarUpload().getOriginalFilename();
+			String aadharFile = aadharLocation +aadharName;
+			try {
+				FileCopyUtils.copy(farmer.getAadhaarUpload().getInputStream(), new FileOutputStream(aadharFile));
+			}
+			catch (IOException e) {
+	            e.printStackTrace();
+	            status.setStatus(StatusType.FAILURE);
+	            status.setMessage(e.getMessage());
+	            return status;
+			}
+			String panCardLocation ="D:/uploads/Pan/";
+			String panCardName = farmer.getAadhaarUpload().getOriginalFilename();
+			String panCardFile = panCardLocation+panCardName;
+			try {
+				FileCopyUtils.copy(farmer.getPanCardUpload().getInputStream(), new FileOutputStream(panCardFile));
+			}
+			catch (IOException e) {
+	            e.printStackTrace();
+	            status.setStatus(StatusType.FAILURE);
+	            status.setMessage(e.getMessage());
+	            return status;
+			}
+		System.out.println(aadharFile);
+		System.out.println(panCardFile);
+		newFarmer.setAadhaarUpload(aadharFile);
+		newFarmer.setPanCardUpload(panCardFile);
+		int result = farmerService.updateFarmer(newFarmer);
+		if(result>0) {
+		status.setStatus(StatusType.SUCCESS);
+        status.setMessage("Uploaded Successfully!");
+		}
+		else
+		{
+			status.setStatus(StatusType.FAILURE);
+	        status.setMessage("Uploaded Failed!");
+		}
+        return status;
+		
 	}
 	
 	@PostMapping(path = "/placeASellRequest")

@@ -26,21 +26,20 @@ public class FarmerServicesImpl implements FarmerServices {
 	@Autowired
 	SalesDao salesdao;
 	
-	public boolean addOrUpdate(Farmer farmer) {
+	public int addOrUpdate(Farmer farmer) {
 		
 		try {
 			
 			farmerdao.findFarmerByAadharNo(farmer.getAadhaarCardNumber());
-			return false;
+			return 0;
 		
-		} catch (NoResultException  e) {
+		} catch (Exception  e) {
 			
-			farmerdao.addOrUpdate(farmer);
+			Farmer newFarmer = farmerdao.addOrUpdate(farmer);
+			return newFarmer.getfId();
 		}
 		
-		return true;
 	}
-	
 	public boolean placeASellRequest(Sales sale,int farmerId) {
 		
 		Farmer record = farmerdao.findFarmerById(farmerId);
@@ -90,5 +89,19 @@ public class FarmerServicesImpl implements FarmerServices {
 			}
 		}
 		return res;
+	}
+	
+	public int updateFarmer(Farmer farmer) {
+		Farmer newFarmer = farmerdao.addOrUpdate(farmer);
+		return newFarmer.getfId();
+	}
+	
+	@Override
+	public Farmer findFarmerById(int fId) {
+		try {
+			return farmerdao.findFarmerById(fId);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

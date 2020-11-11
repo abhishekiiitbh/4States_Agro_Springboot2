@@ -26,6 +26,7 @@ public class SaleServicesImpl implements SaleServices {
 		for (Sales s : sales) {
 			if (s.isCheckRequest() == true && s.isCropSold() == true && s.getFarmer().getfId()==fId) {
 				SalesViewDto sale=new SalesViewDto();
+				sale.setSalesId(s.getSalesId());
 				sale.setCropName(s.getCropName());
 				sale.setCropType(s.getCropType());
 				sale.setBasePrice(s.getBasePrice());
@@ -54,6 +55,7 @@ public class SaleServicesImpl implements SaleServices {
 		for (Sales s : sales) {
 			if (s.isCheckRequest() == true && s.isCropSold() == false) {
 				SalesViewDto sale=new SalesViewDto();
+				sale.setSalesId(s.getSalesId());
 				sale.setCropName(s.getCropName());
 				sale.setCropType(s.getCropType());
 				sale.setBasePrice(s.getBasePrice());
@@ -72,6 +74,58 @@ public class SaleServicesImpl implements SaleServices {
 		}
 
 		return res;
+	}
+
+	@Override
+	public SalesViewDto findSalesById(int salesId) {
+		
+		SalesViewDto sale = new SalesViewDto();
+		Sales s = salesDaoImpl.findSalesById(salesId);
+		sale.setSalesId(s.getSalesId());
+		sale.setCropName(s.getCropName());
+		sale.setCropType(s.getCropType());
+		sale.setBasePrice(s.getBasePrice());
+		sale.setBiddingAmount(s.getBiddingAmount());
+		sale.setCropImage1(s.getCropImage1());
+		sale.setCropImage2(s.getCropImage2());
+		sale.setFarmerName(s.getFarmer().getName());
+		sale.setState(s.getFarmer().getState());
+		sale.setQuantity(s.getQuantity());
+		sale.setFertilizer(s.getFertilizer());
+		sale.setSaleEndDate(s.getSaleEndDate());
+		sale.setSaleStartDate(s.getSaleStartDate());
+		sale.setSoilPhCertificate(s.getSoilPhCertificate());
+		return sale;
+	}
+	
+	@Override
+	public List<SalesViewDto> viewSellRequest() {
+		List<Sales> sales=salesDaoImpl.viewAllSales();
+		List<SalesViewDto> result=new ArrayList<SalesViewDto>();
+		for (Sales s : sales) {
+			if (s.isCheckRequest() == false && s.isCropSold() == false) {
+				SalesViewDto sale=new SalesViewDto();
+				sale.setSalesId(s.getSalesId());
+				sale.setCropName(s.getCropName());
+				sale.setCropType(s.getCropType());
+				sale.setBasePrice(s.getBasePrice());
+				sale.setBiddingAmount(s.getBiddingAmount());
+				sale.setCropImage1(s.getCropImage1());
+				sale.setCropImage2(s.getCropImage2());
+				sale.setFarmerName(s.getFarmer().getName());
+				sale.setState(s.getFarmer().getState());
+				sale.setQuantity(s.getQuantity());
+				sale.setFertilizer(s.getFertilizer());
+				sale.setSaleEndDate(s.getSaleEndDate());
+				sale.setSaleStartDate(s.getSaleStartDate());
+				sale.setSoilPhCertificate(s.getSoilPhCertificate());
+				
+				result.add(sale);
+			}
+		}
+
+		return result;
+		
 	}
 	
 }

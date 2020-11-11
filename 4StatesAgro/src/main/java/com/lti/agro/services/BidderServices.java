@@ -11,5 +11,5 @@ public interface BidderServices {
 	public List<Sales> purchaseHistory(int bId);
 	public List<SalesViewDto> viewWonAuction(int bId);
 	public boolean makePayment(int sId);
-	public void placeBid(int sId, double biddingAmount,int bId);
+	public boolean placeBid(int sId, double biddingAmount,int bId);
 }

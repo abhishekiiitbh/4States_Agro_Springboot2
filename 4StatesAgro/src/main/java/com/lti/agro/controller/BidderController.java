@@ -81,10 +81,17 @@ public class BidderController {
 	
 	@PostMapping(path="/make-bid")
 	public Status makeBidOnProduct(@RequestParam("sId") int sId,@RequestParam("bidAmount")double bidAmount,@RequestParam("bId")int bId) {
-		 bidderServices.placeBid(sId, bidAmount, bId);
+		 boolean result = bidderServices.placeBid(sId, bidAmount, bId);
 		 Status status=new Status();
+		 if(result) {
 		 status.setStatus(StatusType.SUCCESS);
 		 status.setMessage("Bid Was Successful");
+		 }
+		 else
+		 {
+			 status.setStatus(StatusType.FAILURE);
+			 status.setMessage("Bid Was UnSuccessful");
+		 }
 		 return status;
 		 //System.out.println("Made SuccessFully");
 	}

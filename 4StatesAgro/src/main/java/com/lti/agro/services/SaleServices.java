@@ -7,4 +7,6 @@ import com.lti.agro.dto.SalesViewDto;
 public interface SaleServices {
 	public List<SalesViewDto> viewSoldCropHistory(int fId);
 	public List<SalesViewDto> viewAllSales();
+	public SalesViewDto findSalesById(int salesId);
+	public List<SalesViewDto> viewSellRequest();
 }

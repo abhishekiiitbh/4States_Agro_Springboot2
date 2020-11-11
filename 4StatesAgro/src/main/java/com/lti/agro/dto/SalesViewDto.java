@@ -15,7 +15,16 @@ public class SalesViewDto {
 	LocalDate saleStartDate;
 	LocalDate saleEndDate;
 	String farmerName;
+	
 	String state;
+	int salesId;
+	
+	public int getSalesId() {
+		return salesId;
+	}
+	public void setSalesId(int salesId) {
+		this.salesId = salesId;
+	}
 	public String getCropName() {
 		return cropName;
 	}

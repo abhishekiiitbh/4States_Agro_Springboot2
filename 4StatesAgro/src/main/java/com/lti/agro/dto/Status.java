@@ -4,8 +4,17 @@ public class Status {
 	
 	private StatusType status;
     private String message;
+    private int id;
     
-    public static enum StatusType {
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public static enum StatusType {
         SUCCESS, FAILURE;
     }
 

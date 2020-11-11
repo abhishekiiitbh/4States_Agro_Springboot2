@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.agro.dto.AdminViewInsuranceApplicationDto;
+import com.lti.agro.dto.LoginStatus;
 import com.lti.agro.dto.RequestDto;
 import com.lti.agro.dto.Status;
 import com.lti.agro.dto.Status.StatusType;
@@ -146,18 +147,10 @@ public class AdminController {
 	}
 	
 	@PostMapping(path = "/login")
-	public Status login(@RequestParam("email") String email,@RequestParam("pwd") String password,@RequestParam("type") String userType) {
+	public LoginStatus login(@RequestParam("email") String email,@RequestParam("pwd") String password,@RequestParam("type") String userType) {
 		System.out.println(email+ " "+password+" "+userType);
-		boolean result = signin.signIn(email, password, userType);
-		Status status=new Status();
-		if(result) {
-			status.setStatus(StatusType.SUCCESS);
-			status.setMessage("Login Successfull");
-		}else {
-			status.setStatus(StatusType.FAILURE);
-			status.setMessage("Login Failed");
-		}
-		return status;
+		return signin.signIn(email, password, userType);
+		
 	}
 	
 	@PostMapping(path="/ApproveInsuranceClaim")

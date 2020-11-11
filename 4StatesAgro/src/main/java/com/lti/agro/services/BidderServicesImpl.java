@@ -79,7 +79,7 @@ public class BidderServicesImpl implements BidderServices {
 	
 
 
-	public void placeBid(int sId, double biddingAmount,int bId) {
+	public boolean placeBid(int sId, double biddingAmount,int bId) {
 		Sales sales=salesDaoImpl.findSalesById(sId);
 		if(sales.getBiddingAmount()<biddingAmount) {
 			sales.setBiddingAmount(biddingAmount);
@@ -89,7 +89,9 @@ public class BidderServicesImpl implements BidderServices {
 			list.add(sales);
 			bidder.setSales(list);
 			salesDaoImpl.addOrUpdateSales(sales);
-			}
+			return true;
+		}
+		return false;
 		
 	}
 	

@@ -31,7 +31,17 @@ import com.lti.agro.services.SaleServices;
 			return saleService.viewSoldCropHistory(fId);
 
 		}
-
+		
+		@GetMapping(path = "/findSale")
+		public SalesViewDto findSalesById(@RequestParam("sId") int sId)
+		{
+			return saleService.findSalesById(sId);
+		}
+		
+		@GetMapping(path="/viewSellRequests")
+		public List<SalesViewDto> viewSellRequest(){
+			return saleService.viewSellRequest();
+		}
 	}
 
 
