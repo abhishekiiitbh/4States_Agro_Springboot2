@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lti.agro.dto.Status;
 import com.lti.agro.dto.Status.StatusType;
 import com.lti.agro.services.ForgotPasswordServices;
-
-@RestController
 @CrossOrigin
+@RestController
 public class ForgotPasswordController {
 	
 	@Autowired
 	ForgotPasswordServices forgotPasswordService;
 	
-	@PostMapping(path = "/pass")
+	@PostMapping(path = "/forgotPassword")
 	public Status forgotPassword(@RequestParam("email")String email,@RequestParam("userType") String userType) {
 		boolean result=forgotPasswordService.forgotPasswordEmailCheck(email, userType);
 		Status status = new Status();
