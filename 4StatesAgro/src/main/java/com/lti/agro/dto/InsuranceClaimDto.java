@@ -5,12 +5,21 @@ import java.time.LocalDate;
 public class InsuranceClaimDto {
 	int rId;
 	String causeOfClaim;
+	double sumAssured;
 	LocalDate dateOfLoss;
 	LocalDate dateOfClaim;
 	String cropImage1;
 	String cropImage2;
 	int policyNo;
 	
+	
+	
+	public double getSumAssured() {
+		return sumAssured;
+	}
+	public void setSumAssured(double sumAssured) {
+		this.sumAssured = sumAssured;
+	}
 	public int getrId() {
 		return rId;
 	}

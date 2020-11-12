@@ -235,6 +235,7 @@ public class AdminServicesImpl implements AdminServices{
 				app.setDateOfClaim(ic.getDateOfClaim());
 				app.setDateOfLoss(ic.getDateOfLoss());
 				app.setPolicyNo(ic.getInsuranceapplication().getPolicyNo());
+				app.setSumAssured(ic.getInsuranceapplication().getSumAssured());
 				app.setrId(ic.getrId());
 				requests.add(app);
 			}

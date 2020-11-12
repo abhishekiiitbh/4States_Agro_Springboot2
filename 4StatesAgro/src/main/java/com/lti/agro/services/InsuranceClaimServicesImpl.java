@@ -17,30 +17,32 @@ public class InsuranceClaimServicesImpl implements InsuranceClaimServices {
 	@Autowired
 	EmailService emailService;
 
-	public boolean addOrUpdateInsuranceClaim(InsuranceClaim insuranceClaim, int policyNo) {
+	public int addOrUpdateInsuranceClaim(InsuranceClaim insuranceClaim, int policyNo) {
 
 		InsuranceApplications app=insuranceServiceImpl.findInsurnceByPolicyNo(policyNo);
-		if ( app!= null) {
+		if ( app!= null&&app.isStatus()==true) {
 			
 			System.out.println("True");
 			try {
 				insuranceClaimDao.checkClaimExists(policyNo);
-				return false;
+				System.out.println("false");
+				String text = "Your Claim Request for Policy NO:"+policyNo +"Failed!"; 
+				String subject = "Registration Rejected!";
+				emailService.sendEmailForNewRegistration(app.getEmail(), text, subject);
+				
+				return 0;
 			} catch (Exception e) {
                 insuranceClaim.setInsuranceapplication(app);
 //              app.setInsuranceclaim(insuranceClaim);
-				insuranceClaimDao.placeAClaimRequest(insuranceClaim);
+				InsuranceClaim newclaim = insuranceClaimDao.placeAClaimRequest(insuranceClaim);
 				String text = "Your Claim Request for Policy NO:"+policyNo +"\n Please Await for the confirmation from our team!"; 
 				String subject = "Registration Aproved!";
 				emailService.sendEmailForNewRegistration(app.getEmail(), text, subject);
-				return true;
+				return newclaim.getrId();
 			}
-		}else {
-			System.out.println("false");
-			String text = "Your Claim Request for Policy NO:"+policyNo +"Failed!"; 
-			String subject = "Registration Rejected!";
-			emailService.sendEmailForNewRegistration(app.getEmail(), text, subject);
-			return false;
+		}
+		else {
+			return 0;
 		}
 
 	}

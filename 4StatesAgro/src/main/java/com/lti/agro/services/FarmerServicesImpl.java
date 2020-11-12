@@ -40,11 +40,11 @@ public class FarmerServicesImpl implements FarmerServices {
 		}
 		
 	}
-	public boolean placeASellRequest(Sales sale,int farmerId) {
+	public int placeASellRequest(Sales sale,int farmerId) {
 		
 		Farmer record = farmerdao.findFarmerById(farmerId);
 		if(record==null)
-			return false;
+			return 0;
 		
 		sale.setBasePrice(0);
 		sale.setCheckRequest(false);
@@ -54,14 +54,14 @@ public class FarmerServicesImpl implements FarmerServices {
 		sale.setSaleStartDate(LocalDate.of(1, 1, 1));
 		sale.setSaleEndDate(LocalDate.of(1, 1, 1));
 		sale.setFarmer(record);
-		salesdao.addOrUpdateSales(sale);
+		Sales newSale = salesdao.addOrUpdateSales(sale);
 		
 		String text="Your Request for Sale has been placed successfully! \n Please await for"
 				+" confirmation mail from our Team for furher Quality Check Process!"+"\n Regards! \n 4StatesAgro ";
 	
 		String subject = "Registration Confirmation";
 		emailService.sendEmailForNewRegistration(record.getEmail(), text, subject);
-		return true;
+		return newSale.getSalesId();
 	}
 	
 	public List<SalesViewDto> viewAllSales(int fId) {

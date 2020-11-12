@@ -42,20 +42,22 @@ public class InsuranceClaimController {
 		claim.setDateOfClaim(insuranceClaimDto.getDateOfClaim());
 		claim.setDateOfLoss(insuranceClaimDto.getDateOfLoss());
 		claim.setDateOfApproval(LocalDate.of(1, 1, 1));
+		claim.setDateOfClaim(LocalDate.now());
 		claim.setAmountClaimed(0);
 		claim.setTransactionId(null);
 		int policyNo=insuranceClaimDto.getPolicyNo();
-		boolean result=insuranceClaimServices.addOrUpdateInsuranceClaim(claim, policyNo);
+		int result=insuranceClaimServices.addOrUpdateInsuranceClaim(claim, policyNo);
 		
 		
 		Status status=new Status();
-		if(result) {
+		if(result>0) {
 			status.setStatus(StatusType.SUCCESS);
 			status.setMessage("Claim succesfully submitted");
-			
+			status.setId(result);
 		}else {
 			status.setStatus(StatusType.FAILURE);
 			status.setMessage("You have already placed a claim or policy number does not exist");
+			status.setId(0);
 		}
 		return status;
 		

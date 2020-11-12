@@ -143,18 +143,20 @@ public class FarmerController {
 		sales.setCropImage2(saleRequest.getCropImage2());
 		int farmerId= saleRequest.getFarmerId();
 		
-		boolean newsale = farmerService.placeASellRequest(sales,farmerId);
+		int newsale = farmerService.placeASellRequest(sales,farmerId);
 
 		Status status = new Status();
-		if(newsale)
+		if(newsale>0)
 		{
 			status.setStatus(StatusType.SUCCESS);
 			status.setMessage("Sell Request Placed Successfully!");
+			status.setId(newsale);
 		}
 		else
 		{
 			status.setStatus(StatusType.FAILURE);
 			status.setMessage("Sell Request didn't get placed successfully!!");
+			status.setId(0);
 		}
 		return status;
 	}
