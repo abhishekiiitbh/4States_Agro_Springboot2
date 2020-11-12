@@ -23,6 +23,9 @@ public class BidderServicesImpl implements BidderServices {
 	@Autowired
 	SalesDao salesDaoImpl;
 	
+	@Autowired
+	EmailService emailService;
+	
 	public int addOrUpdateABidder(Bidder bidder) {
 		
 		try {
@@ -75,6 +78,14 @@ public class BidderServicesImpl implements BidderServices {
 		String transactionId = UUID.randomUUID().toString();
 		sale.setTransactionId(transactionId);
 		salesDaoImpl.addOrUpdateSales(sale);
+		String text="A transaction Amount of ₹"+sale.getBiddingAmount()+" made towards "+sale.getFarmer().getName()+" was Successfully! \n"
+				+ "Your Transaction Id is: "+ transactionId;
+	
+		String subject = "Transaction Successfull!";
+		emailService.sendEmailForNewRegistration(sale.getBidder().getEmail(), text, subject);
+		text="Amount of ₹"+sale.getBiddingAmount()+" has been successfully credited into your account from "+sale.getBidder().getName()
+				+"\n TransactionId is: "+transactionId;
+		emailService.sendEmailForNewRegistration(sale.getFarmer().getEmail(), text, subject);
 		return true;
 	}
 	

@@ -42,6 +42,9 @@ public class AdminServicesImpl implements AdminServices{
 	@Autowired
 	InsuranceClaimDao insuranceClaimDao;
 	
+	@Autowired
+	EmailService emailService;
+	
 	public Farmer approveFarmerRegistration(int fId) {
 		Farmer newFarmer = farmerdao.findFarmerById(fId);
 		if(newFarmer==null)
@@ -72,14 +75,11 @@ public class AdminServicesImpl implements AdminServices{
 			if(sales==null) {
 				return null;
 			}
-			LocalDate endDate=sales.getSaleEndDate();
-			LocalDate today=LocalDate.of(2020, 11, 12);
-			System.out.println("SalesEnddate:"+endDate);
-			if(endDate.compareTo(today)==0) {
+		
 				sales.setCropSold(true);
 				salesDaoImpl.addOrUpdateSales(sales);
 				System.out.println("Sales endDate:::"+sales.getSaleEndDate());
-			}
+			
 			return sales;
 		}
 		
@@ -132,6 +132,10 @@ public class AdminServicesImpl implements AdminServices{
 			if(newapp!= null) {
 				newapp.setStatus(true);
 				insuranceDao.ApplyForInsurance(newapp);
+				String text="Your Request for Insurance Application is approved! \n Your Policy No is:"+policyNo;
+			
+			String subject = "Registration Confirmation";
+			emailService.sendEmailForNewRegistration(newapp.getEmail(), text, subject);
 				return true;
 			}
 			return false;
@@ -143,8 +147,14 @@ public class AdminServicesImpl implements AdminServices{
 			if(newclaim!=null) {
 				newclaim.setDateOfApproval(LocalDate.now());
 				newclaim.setAmountClaimed(amountClaim);
-				newclaim.setTransactionId(UUID.randomUUID().toString());
+				String transactionId=UUID.randomUUID().toString();
+				newclaim.setTransactionId(transactionId);
 				insuranceClaimDao.placeAClaimRequest(newclaim);
+				String text="Your Request for Insurance claim is approved! \n Amount od ₹"+amountClaim +"has been Debited into your account!\n"
+						+ "Please use below transaction Id for any inconvenience:\n"+transactionId;
+				
+				String subject = "Registration Confirmation";
+				emailService.sendEmailForNewRegistration(newclaim.getInsuranceapplication().getEmail(), text, subject);
 				return true;
 			}
 			return false;

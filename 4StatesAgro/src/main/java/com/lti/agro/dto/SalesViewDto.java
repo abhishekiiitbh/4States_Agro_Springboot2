@@ -15,10 +15,17 @@ public class SalesViewDto {
 	LocalDate saleStartDate;
 	LocalDate saleEndDate;
 	String farmerName;
-	
+	String transactionId;
 	String state;
 	int salesId;
 	
+	
+	public String getTransactionId() {
+		return transactionId;
+	}
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
 	public int getSalesId() {
 		return salesId;
 	}

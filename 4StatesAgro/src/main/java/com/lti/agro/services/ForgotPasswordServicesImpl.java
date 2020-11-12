@@ -35,6 +35,8 @@ public class ForgotPasswordServicesImpl implements ForgotPasswordServices {
 			try {
 				System.out.println("Inside");
 				farmer=farmerDao.findFarmerByEmaiId(email);
+				if(farmer.isApproval()==false)
+					return false;
 				String generator = UUID.randomUUID().toString();
 				String generated[] = generator.split("-");
 				OTP = generated[3];
@@ -52,6 +54,8 @@ public class ForgotPasswordServicesImpl implements ForgotPasswordServices {
 		{
 			try {
 				bidder=bidderDao.findBidderByEmaiId(email);
+				if(bidder.isApproval()==false)
+					return false;
 				String generator = UUID.randomUUID().toString();
 				String generated[] = generator.split("-");
 				OTP = generated[3];

@@ -40,6 +40,7 @@ public class SaleServicesImpl implements SaleServices {
 				sale.setSaleEndDate(s.getSaleEndDate());
 				sale.setSaleStartDate(s.getSaleStartDate());
 				sale.setSoilPhCertificate(s.getSoilPhCertificate());
+				sale.setTransactionId(s.getTransactionId());
 				res.add(sale);
 			}
 		}

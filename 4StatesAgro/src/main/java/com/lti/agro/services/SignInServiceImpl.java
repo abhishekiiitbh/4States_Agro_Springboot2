@@ -24,12 +24,12 @@ public class SignInServiceImpl implements SignInService {
 		LoginStatus status = new LoginStatus();
 		if(userType.compareTo("Admin")==0){// here we will add login credentails of admin
 			if(email.compareTo("4statesagro@gmail.com")==0 && password.compareTo("Agro@2020")==0)
-				status.setUserId(0);
+			{	status.setUserId(0);
 			status.setName("Admin");
 			status.setStatus(StatusType.SUCCESS);
 			status.setMessage("LoginSuccessFull");
 				return status;
-			
+			}
 		}
 		else if(userType.compareTo("Bidder")==0){
 			
