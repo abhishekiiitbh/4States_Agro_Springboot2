@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -36,6 +37,12 @@ public class ContactUsDaoImpl implements ContactUsDao{
 		Query query=em.createQuery("select c from ContactUsRequest c",ContactUsRequest.class);
 		return query.getResultList();
 	}
+	
+	public ContactUsRequest findById(int cId)
+	{
+		return em.find(ContactUsRequest.class,cId);
+	}
+	
 	
 	
 }
