@@ -49,6 +49,17 @@ public class InsuranceClaimServicesImpl implements InsuranceClaimServices {
 		
 		return ic;
 	}
+	@Override
+	public InsuranceClaim findClaimById(int rId) {
+		return insuranceClaimDao.findByRId(rId);
+	}
+	@Override
+	public boolean updateClaim(InsuranceClaim insuranceClaim) {
+		InsuranceClaim ic = insuranceClaimDao.placeAClaimRequest(insuranceClaim);
+		if(ic!=null)
+			return true;
+		return false;
+	}
 	
 
 }

@@ -47,13 +47,7 @@ public class InsuranceClaim {
 		this.transactionId = transactionId;
 	}
 
-	public InsuranceApplications getInsuranceapplication() {
-		return insuranceapplication;
-	}
-
-	public void setInsuranceapplication(InsuranceApplications insuranceapplication) {
-		this.insuranceapplication = insuranceapplication;
-	}
+	
 
 	public String getCropImage1() {
 		return cropImage1;
@@ -79,11 +73,12 @@ public class InsuranceClaim {
 		this.rId = rId;
 	}
 
-	public InsuranceApplications getInsuranceapplications() {
+	
+	public InsuranceApplications getInsuranceapplication() {
 		return insuranceapplication;
 	}
 
-	public void setInsuranceapplications(InsuranceApplications insuranceapplication) {
+	public void setInsuranceapplication(InsuranceApplications insuranceapplication) {
 		this.insuranceapplication = insuranceapplication;
 	}
 

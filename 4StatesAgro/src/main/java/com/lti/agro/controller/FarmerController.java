@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.agro.dto.FarmerDto;
 import com.lti.agro.dto.SaleRequestDto;
+import com.lti.agro.dto.SalesDocumentDto;
 import com.lti.agro.dto.SalesViewDto;
 import com.lti.agro.dto.Status;
 import com.lti.agro.dto.Status.StatusType;
@@ -26,6 +27,7 @@ import com.lti.agro.entity.Sales;
 import com.lti.agro.repository.SalesDao;
 import com.lti.agro.services.EmailService;
 import com.lti.agro.services.FarmerServices;
+import com.lti.agro.services.SaleServices;
 
 @CrossOrigin
 @RestController
@@ -38,7 +40,7 @@ public class FarmerController {
 	private EmailService emailService;
 	
 	@Autowired
-	SalesDao salesdaotest;
+	SaleServices saleservice;
 	
 	@PostMapping(path="/registerFarmer")
 	public Status registerFarmer(@RequestBody Farmer farmer){
@@ -156,6 +158,8 @@ public class FarmerController {
 		}
 		return status;
 	}
+	
+	
 	
 	@GetMapping(path = "/viewMarketPlaceFarmer")
 	public List<SalesViewDto> viewMarketPlace(@RequestParam("fId") int fId) {

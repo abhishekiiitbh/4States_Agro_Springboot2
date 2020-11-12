@@ -127,5 +127,18 @@ public class SaleServicesImpl implements SaleServices {
 		return result;
 		
 	}
+
+	@Override
+	public Sales findSaleById(int salesId) {
+		return salesDaoImpl.findSalesById(salesId);
+	}
+
+	@Override
+	public boolean updateSales(Sales sale) {
+		Sales sales=salesDaoImpl.addOrUpdateSales(sale);
+		if(sales!=null)
+			return true;
+		return false;
+	}
 	
 }
