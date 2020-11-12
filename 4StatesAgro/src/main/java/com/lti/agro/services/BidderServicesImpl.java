@@ -83,7 +83,7 @@ public class BidderServicesImpl implements BidderServices {
 
 	public boolean placeBid(int sId, double biddingAmount,int bId) {
 		Sales sales=salesDaoImpl.findSalesById(sId);
-		if(sales.getBiddingAmount()<biddingAmount) {
+		if(sales.getBiddingAmount()<biddingAmount&&sales.getBasePrice()<biddingAmount) {
 			sales.setBiddingAmount(biddingAmount);
 			Bidder bidder=bidderDaoImpl.findBidderById(bId);
 			sales.setBidder(bidder);

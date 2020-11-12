@@ -1,9 +1,11 @@
 package com.lti.agro.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import com.lti.agro.dto.FarmerDto;
 import com.lti.agro.dto.SaleRequestDto;
@@ -106,12 +107,12 @@ public class FarmerController {
 	            status.setMessage(e.getMessage());
 	            return status;
 			}
-		System.out.println(aadharFile);
-		System.out.println(panCardFile);
-		System.out.println(certificateFile);
-		newFarmer.setAadhaarUpload(aadharFile);
-		newFarmer.setPanCardUpload(panCardFile);
-		newFarmer.setCertificateUpload(certificateFile);
+		System.out.println(aadharName);
+		System.out.println(panCardName);
+		System.out.println(certificateName);
+		newFarmer.setAadhaarUpload(aadharName);
+		newFarmer.setPanCardUpload(panCardName);
+		newFarmer.setCertificateUpload(certificateName);
 		int result = farmerService.updateFarmer(newFarmer);
 		if(result>0) {
 		status.setStatus(StatusType.SUCCESS);
@@ -162,6 +163,41 @@ public class FarmerController {
 		return farmerService.viewAllSales(fId);
 
 	
+	}
+	
+	@GetMapping(path = "/retrieveFarmerDocuments")
+	public Farmer viewDocuments(@RequestParam("fId") int id,HttpServletRequest request)
+	{
+		Farmer farmer = farmerService.findFarmerById(id);
+		String projPath = request.getServletContext().getRealPath("/");
+		String tempDownloadPath = projPath +"/downloads/";
+		File f = new File(tempDownloadPath);
+		if(!f.exists())
+			f.mkdir();
+		
+		String aadharSourceLocation="D:/uploads/Farmer/Aadhar/";
+		String panCardSourceLocation = "D:/uploads/Farmer/Pan/";
+		
+		
+		
+		String aadhartargetFile = tempDownloadPath + farmer.getAadhaarUpload();
+		System.out.println(aadhartargetFile);
+		String panCardtargetFile = tempDownloadPath + farmer.getPanCardUpload();
+		System.out.println(panCardtargetFile);
+		String aadharsourceFile =  aadharSourceLocation + farmer.getAadhaarUpload();
+		System.out.println(aadharsourceFile);
+		String panCardsourceFile = panCardSourceLocation + farmer.getPanCardUpload();
+		System.out.println(panCardsourceFile);
+		try {
+			FileCopyUtils.copy(new File(aadharsourceFile), new File(aadhartargetFile));
+			FileCopyUtils.copy(new File(panCardsourceFile), new File(panCardtargetFile));
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		farmer.setSales(null);
+		farmer.setInsuranceapplication(null);
+		return farmer;
 	}
 	
 }

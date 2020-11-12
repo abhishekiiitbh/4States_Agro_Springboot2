@@ -1,8 +1,11 @@
 package com.lti.agro.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
@@ -94,12 +97,12 @@ public class BidderController {
 	            status.setMessage(e.getMessage());
 	            return status;
 			}
-		System.out.println(aadharFile);
-		System.out.println(panCardFile);
-		System.out.println(licenseFile);
-		newBidder.setAadhaarUpload(aadharFile);
-		newBidder.setPanCardUpload(panCardFile);
-		newBidder.setTraderLicenseUpload(licenseFile);
+		System.out.println(aadharName);
+		System.out.println(panCardName);
+		System.out.println(licenseName);
+		newBidder.setAadhaarUpload(aadharName);
+		newBidder.setPanCardUpload(panCardName);
+		newBidder.setTraderLicenseUpload(licenseName);
 		int result = bidderServices.updateABidder(newBidder);
 		if(result>0) {
 		status.setStatus(StatusType.SUCCESS);
@@ -161,6 +164,41 @@ public class BidderController {
 		 }
 		 return status;
 		 //System.out.println("Made SuccessFully");
+	}
+	
+	@GetMapping(path = "/retrieveBidderDocuments")
+	public Bidder getDocuments(@RequestParam("bId")int bId,HttpServletRequest request)
+	{
+		Bidder bidder = bidderServices.findBidderById(bId);
+		String projPath = request.getServletContext().getRealPath("/");
+		String tempDownloadPath = projPath +"/downloads/";
+		File f = new File(tempDownloadPath);
+		if(!f.exists())
+			f.mkdir();
+		
+		String aadharSourceLocation="D:/uploads/Bidder/Aadhar/";
+		String panCardSourceLocation = "D:/uploads/Bidder/Pan/";
+		
+		
+		
+		String aadhartargetFile = tempDownloadPath + bidder.getAadhaarUpload();
+		System.out.println(aadhartargetFile);
+		String panCardtargetFile = tempDownloadPath + bidder.getPanCardUpload();
+		System.out.println(panCardtargetFile);
+		String aadharsourceFile =  aadharSourceLocation + bidder.getAadhaarUpload();
+		System.out.println(aadharsourceFile);
+		String panCardsourceFile = panCardSourceLocation + bidder.getPanCardUpload();
+		System.out.println(panCardsourceFile);
+		try {
+			FileCopyUtils.copy(new File(aadharsourceFile), new File(aadhartargetFile));
+			FileCopyUtils.copy(new File(panCardsourceFile), new File(panCardtargetFile));
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		bidder.setSales(null);
+		
+		return bidder;
 	}
 	
 }
